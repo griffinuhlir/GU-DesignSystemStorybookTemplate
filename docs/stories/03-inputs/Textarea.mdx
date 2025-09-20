@@ -1,0 +1,45 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+
+import * as TextareaStories from './Textarea.stories';
+
+<Meta of={TextareaStories} />
+
+# Textarea
+
+- [Overview](#overview)
+- [Usage](#usage)
+- [Props](#props)
+- [Variants](#variants)
+
+## Overview
+
+TextAreas allows user to enter a sizeable amount of free-form text.
+
+<ViewSource path="components/Textarea" />
+
+## Usage
+
+```js
+import { Textarea } from '@strapi/design-system';
+```
+
+<Canvas of={TextareaStories.Base} />
+
+## Props
+
+<Controls of={TextareaStories.Base} />
+## Variants
+
+### Base
+
+<Canvas of={TextareaStories.Base} />
+
+### Disabled
+
+<Canvas of={TextareaStories.Disabled} />
+
+### Textarea field
+
+Textarea wrapped with [`Field`](../?path=/docs/components-field--docs) component
+
+<Canvas of={TextareaStories.WithField} />

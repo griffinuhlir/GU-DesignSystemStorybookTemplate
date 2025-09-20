@@ -1,0 +1,32 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "storybook-static/**"]
+    },
+    "@strapi/icons#build": {
+      "dependsOn": ["^build"],
+      "inputs": ["assets/**", "src/index.ts", "src/symbols-index.ts", "svgr.*.config.js"],
+      "outputs": ["dist/**", "src/icons/*", "src/symbols/*"]
+    },
+    "clean": {
+      "cache": false,
+      "persistent": true
+    },
+    "develop": {
+      "cache": false,
+      "persistent": true
+    },
+    "format": {},
+    "lint": {
+      "dependsOn": ["^build"]
+    },
+    "test:unit": {
+      "dependsOn": ["^build"]
+    },
+    "test:ts": {
+      "dependsOn": ["^build"]
+    }
+  }
+}
