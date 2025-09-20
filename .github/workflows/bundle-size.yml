@@ -1,0 +1,42 @@
+name: Bundle-size
+
+on:
+  pull_request: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  size:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
+      - name: 'Restore cache'
+        uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install deps
+        run: yarn install
+
+      - name: Build
+        run: yarn build --filter=\!@strapi/design-system-docs
+
+      - name: Calculate size
+        uses: preactjs/compressed-size-action@v2
+        with:
+          pattern: '**/dist/**/*.{cjs,js,mjs,svg}'
+          install-script: 'yarn install'

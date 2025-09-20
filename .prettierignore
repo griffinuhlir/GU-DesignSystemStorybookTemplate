@@ -1,0 +1,8 @@
+.next
+node_modules
+dist
+packages/icons/src
+# for now
+website
+
+storybook-static
